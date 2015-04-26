@@ -12,50 +12,45 @@ function amIaPrime(number : Int64) : boolean;
     testNum: Int64;
   begin
   testNum := number;
-  result := false;
-  if ((testNum mod 2 = 0) and (testNum <> 2)) or (testNum <= 1) then
+  if (testNum < 1) then
     result := false
-  else if testNum = 2 then
-      result := true
+  else if (testNum = 1) then
+    result := false
+  else if (testNum <> 2) and (testNum mod 2 = 0) then
+    result := false
   else
-    begin
-    testNum := trunc(Sqrt(testNum));
-    testNum := testNum + 1;
     while testNum > 1 do
       begin
       testNum := testNum - 1;
-      if testNum <= 1 then
+      if testNum = 1 then
        result := true
      else if (number mod testNum = 0) then
        begin
-       result := false;
+        result := false;
        break;
        end;
      end;
-    end;
   end;
 
 var
-  number, next, pair: Int64;
+  number, next: Int64;
 begin
   number := 600851475143;
-  WriteLn(amIaPrime(9973));
-  WriteLn(amIaPrime(9601));
-  Readln;
   try
-    next := 1;
-    while next < number do
+    next := number;
+    while True do
       begin
-      next := next + 1;
-      WriteLn(next);
+      next := next - 1;
+      if (next mod 100000 = 0) then
+        WriteLn(next);
       if number mod next = 0 then
         begin
-        pair := number div next;
-        WriteLn(pair);
-        if amIaPrime(pair) then
+        WriteLn(next);
+        if amIaPrime(next) then
           begin
-          WriteLn('My pair is ' + IntToStr(pair));
+          WriteLn(next);
           ReadLn;
+          break;
           end;
         end;
       end;
