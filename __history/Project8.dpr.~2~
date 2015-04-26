@@ -7,30 +7,8 @@ program Project8;
 uses
   System.SysUtils;
 
-function productOfChars(charArray:  Array of Char): Integer;
-  var
-    i, productOfChars : Integer;
-  begin
-  if Length(charArray) <> 0 then
-    begin
-    productOfChars := StrToInt(charArray[0]);
-    for I := 1 to Length(charArray)-1 do
-      begin
-      productOfChars := productOfChars * StrToInt(charArray[i]);
-      end;
-    result := productOfChars;
-    end
-  else
-    result := -1;
-
-  end;
-
-
 var
   stringBlock : string;
-  myArray:  Array[1..13] of char;
-  i, length, checkLength, greatestProduct : integer;
-  stillChecking : boolean;
 
 begin
   stringBlock := '73167176531330624919225119674426574742355349194934' +
@@ -53,25 +31,10 @@ begin
                  '84580156166097919133875499200524063689912560717606' +
                  '05886116467109405077541002256983155200055935729725' +
                  '71636269561882670428252483600823257530420752963450';
-    stillChecking := true;
-    checkLength := 13;
-    length := stringBlock.Length;
-    for I := 1 to checkLength do
-      begin
-      if length >= checkLength then
-        myArray[i] := stringBlock[i]
-      else
-        begin
-        WriteLn('Checklength is larger than the size of the stringblock.');
-        break;
-        end;
-      end;
-    i := checkLength + 1;
-    if i > length then
-      stillChecking := false;
-    while stillChecking do
-      begin
-      if productOfChars(myArray) > greatestProduct then
-        greatestProduct := productOfChars(myArray);
-      end;
+  try
+
+  except
+    on E: Exception do
+      Writeln(E.ClassName, ': ', E.Message);
+  end;
 end.

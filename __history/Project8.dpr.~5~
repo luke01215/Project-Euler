@@ -11,14 +11,13 @@ function productOfChars(charArray:  Array of Char): Integer;
   var
     i, productOfChars : Integer;
   begin
+  productOfChars := 0;
   if Length(charArray) <> 0 then
     begin
-    productOfChars := StrToInt(charArray[0]);
-    for I := 1 to Length(charArray)-1 do
+    for I := 1 to Length(charArray) do
       begin
-      productOfChars := productOfChars * StrToInt(charArray[i]);
+
       end;
-    result := productOfChars;
     end
   else
     result := -1;
@@ -53,9 +52,10 @@ begin
                  '84580156166097919133875499200524063689912560717606' +
                  '05886116467109405077541002256983155200055935729725' +
                  '71636269561882670428252483600823257530420752963450';
+  try
     stillChecking := true;
     checkLength := 13;
-    length := stringBlock.Length;
+    length := Length(stringBlock);
     for I := 1 to checkLength do
       begin
       if length >= checkLength then
@@ -74,4 +74,10 @@ begin
       if productOfChars(myArray) > greatestProduct then
         greatestProduct := productOfChars(myArray);
       end;
+
+
+  except
+    on E: Exception do
+      Writeln(E.ClassName, ': ', E.Message);
+  end;
 end.
